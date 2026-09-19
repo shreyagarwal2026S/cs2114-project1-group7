@@ -1,15 +1,14 @@
 import java.time.LocalDate;
 
-
 public class Habit
 {
-    //~ Fields ................................................................
+    // ~ Fields ................................................................
 
     private String name;
     private FrequencyRule rule;
     private LocalDate dateCreated;
 
-    //~ Constructors ..........................................................
+    // ~ Constructors ..........................................................
 
     public Habit(String name, FrequencyRule rule)
     {
@@ -17,28 +16,31 @@ public class Habit
         {
             throw new IllegalArgumentException();
         }
-        
+
         if (rule == null)
         {
             throw new IllegalArgumentException();
         }
-        
+
         this.name = name;
         this.rule = rule;
         this.dateCreated = LocalDate.now();
     }
-    //~Public  Methods ........................................................
+    // ~Public Methods ........................................................
+
 
     public String getName()
     {
         return name;
     }
-    
+
+
     public FrequencyRule getRule()
     {
         return rule;
     }
-    
+
+
     public LocalDate getDateCreated()
     {
         return dateCreated;
