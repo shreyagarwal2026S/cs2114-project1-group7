@@ -1,4 +1,6 @@
 import student.TestCase;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * // -------------------------------------------------------------------------
@@ -101,6 +103,52 @@ public class CalendarTest
 
 
     /**
+     * Logging a completion for today (a valid, non future date should succeed).
+     */
+    public void testLogCompletionSucceedsForValidDate()
+    {
+        calendar.addHabit(exercise);
+        assertTrue(calendar.logCompletion(exercise, LocalDate.now()));
+    }
+
+
+    /**
+     * Logging a completion for a future date should fail
+     */
+    public void testLogCompletionFailsForFutureDate()
+    {
+        calendar.addHabit(exercise);
+        assertFalse(
+            calendar.logCompletion(exercise, LocalDate.now().plusDays(1)));
+    }
+
+
+    /**
+     * Logging the same habit/date combination twice should fail the second
+     * time.
+     */
+    public void testLogCompletionFailsForDuplicateDate()
+    {
+        calendar.addHabit(exercise);
+        calendar.logCompletion(exercise, LocalDate.now());
+        assertFalse(calendar.logCompletion(exercise, LocalDate.now()));
+    }
+
+
+    /**
+     * A successfully logged completion should appear in that habit's completion
+     * list.
+     */
+    public void testGetCompletionsReflectsLoggedDate()
+    {
+        calendar.addHabit(exercise);
+        LocalDate today = LocalDate.now();
+        calendar.logCompletion(exercise, today);
+        assertTrue(calendar.getCompletions(exercise).contains(today));
+    }
+
+
+    /**
      * Looking up an existing habit by name should return that habit.
      */
     public void testGetHabitByNameReturnsHabit()
@@ -133,8 +181,4 @@ public class CalendarTest
         assertEquals(exercise, all[0]);
         assertEquals(reading, all[1]);
     }
-
-    /**
-     * 
-     */
 }
