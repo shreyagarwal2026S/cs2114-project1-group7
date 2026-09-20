@@ -44,7 +44,6 @@ public class AppRunner
             System.out.println("3. View streaks");
             System.out.println("4. Quit");
             System.out.print("Choose an option: ");
-        
 
             int choice = promptForInt("Choose an option: ");
 
@@ -205,6 +204,7 @@ public class AppRunner
         }
     }
 
+
     /**
      * Displays the current and longest streak for a habit the user chooses by
      * name.
@@ -225,6 +225,24 @@ public class AppRunner
         int longest = calc.longestStreak(h, calendar);
         System.out.println("Current streak: " + current);
         System.out.println("Longest streak: " + longest);
+
+        printReward(current);
     }
 
+    /**
+     * Prints a milestone message if the given streak has reached a reward
+     * threshold (7 days or 30 days). Checks 30 before 7 so a 30 day streak
+     * shows the bigger milestone instead of both.
+     */
+    private void printReward(int streak)
+    {
+        if (streak >=30)
+        {
+            System.out.println("30 day streak!! You're on fire!");
+        }
+        else if (streak >= 7)
+        {
+            System.out.println("7 day streak! Good job!");
+        }
+    }
 }
