@@ -44,13 +44,30 @@ public class AppRunner
             System.out.println("3. View streaks");
             System.out.println("4. Quit");
             System.out.print("Choose an option: ");
-        }
+        
 
-        int choice = promptForInt("Choose an option: ");
+            int choice = promptForInt("Choose an option: ");
 
-        if (choice == 1)
-        {
-            addHabitFlow();
+            if (choice == 1)
+            {
+                addHabitFlow();
+            }
+            else if (choice == 2)
+            {
+                logCompletionFlow();
+            }
+            else if (choice == 3)
+            {
+                viewStreaksFlow();
+            }
+            else if (choice == 4)
+            {
+                running = false;
+            }
+            else
+            {
+                System.out.println("Please choose 1-4.");
+            }
         }
     }
 
@@ -175,7 +192,7 @@ public class AppRunner
             return;
         }
 
-        LocalDate date = promptForDate("Date completed (YYY-MM-DD): ");
+        LocalDate date = promptForDate("Date completed (YYYY-MM-DD): ");
         if (!calendar.logCompletion(h, date))
         {
             System.out.println(

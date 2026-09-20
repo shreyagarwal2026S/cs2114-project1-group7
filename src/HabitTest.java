@@ -1,4 +1,3 @@
-package src;
 
 import student.TestCase;
 
@@ -53,7 +52,7 @@ public class HabitTest
         {
             new Habit("Gym", null);
         }
-        catch(IllegalArgument Exception e)
+        catch(IllegalArgumentException e)
         {
             thrown = e;
         }

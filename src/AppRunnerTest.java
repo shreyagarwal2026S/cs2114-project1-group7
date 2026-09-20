@@ -75,18 +75,36 @@ public class AppRunnerTest
      * Non numeric input should trigger a re-prompt, and the next valid line
      * should be the value returned
      */
-    public void testPromptForInvalidInput()
+    public void testPromptForIntRepromptsInvalidInput()
     {
         AppRunner runner = runnerWithInput("abc\n5\n");
         assertEquals(5, runner.promptForInt("Enter a number: "));
         assertTrue(outContent.toString().contains("not a number"));
     }
 
+
     /**
      * A single valid date string should parse correctly with no re-prompt.
      */
     public void testPromptForDateValidInput()
     {
-        
+        AppRunner runner = runnerWithInput("2026-01-01\n");
+        assertEquals(
+            LocalDate.of(2026, 1, 1),
+            runner.promptForDate("Enter a date: "));
+    }
+
+
+    /**
+     * Malformed date text should trigger a re-prompt, and the next valid line
+     * should be the date returned.
+     */
+    public void testPromptForDateRepromptsInvalidInput()
+    {
+        AppRunner runner = runnerWithInput("not-a-date\n2026-01-01\n");
+        assertEquals(
+            LocalDate.of(2026, 1, 1),
+            runner.promptForDate("Enter a date: "));
+        assertTrue(outContent.toString().contains("valid date"));
     }
 }
